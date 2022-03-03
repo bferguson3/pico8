@@ -18,6 +18,13 @@ function mb(base,x,y)
 	return (base + ((py+y)*128)+(px+x))
 end
 
+function iswall(i)
+	if(i==32)or(i==37)or(i==34)then
+		return _t
+	end 
+	return _f
+end
+
 function drawwalls()
 	for i=0,18 do t[i]=0 end 
 	mapbase=0x2000+(yofs*128)+xofs
@@ -77,16 +84,17 @@ function drawwalls()
 	//-- t[] now contains the tile data in the view position array:
 	//-- add 16 if x%2==0
 	//-- back row 
+	//--37=blue wall, 34=pink wall
 	ab=0
-	if t[0]==32 then 
+	if iswall(t[0]) then 
 		spr(wall_a,8,32)
 		spr(wall_a,8,40)
 	end 
-	if t[4]==32 then 
+	if iswall(t[4]) then 
 		spr(wall_a,64,32)
 		spr(wall_a,64,40)
 	end 
-	if t[1]==32 then 
+	if iswall(t[1]) then 
 		spr(wall_a,16,32)
 		spr(wall_a,16,40)
 		spr(wall_a,24,32)
@@ -98,7 +106,7 @@ function drawwalls()
 		sspr(48,0,16,16,18,37,8,8)
 	end
 	 
-	if t[3]==32 then 
+	if iswall(t[3]) then 
 		spr(wall_a,48,32)
 		spr(wall_a,48,40)
 		spr(wall_a,56,32)
@@ -110,7 +118,7 @@ function drawwalls()
 		sspr(48,0,16,16,54,37,8,8)
 	end
 	 
-	if t[2]==32 then 
+	if iswall(t[2]) then 
 		spr(wall_a,32,32)
 		spr(wall_a,32,40)
 		spr(wall_a,40,32)
@@ -122,19 +130,19 @@ function drawwalls()
 		sspr(48,0,16,16,36,37,8,8)
 	end
 	//-- row 2
-	if t[5]==32 then 
+	if iswall(t[5]) then 
 		spr(wall_a,8,32)
 		spr(wall_a,8,40)
 		spr(wall_a+4,8,24)
 		spr(wall_a+1,8,48)
 	end
-	if t[9]==32 then 
+	if iswall(t[9]) then 
 		spr(wall_a,64,32)
 		spr(wall_a,64,40)
 		spr(wall_a+3,64,24)
 		spr(wall_a+2,64,48)
 	end
-	if t[6]==32 then
+	if iswall(t[6]) then
 		for y=24,40,16 do 
 			for x=8,16,16 do 
 				sspr(0,48,16,16,x,y)
@@ -147,7 +155,7 @@ function drawwalls()
 	elseif t[6]==21 then 
 		sspr(48,0,16,16,9,34)
 	end
-	if t[8]==32 then 
+	if iswall(t[8]) then 
 		for y=24,40,16 do 
 			for x=56,64,16 do 
 				sspr(0,48,16,16,x,y)
@@ -160,7 +168,7 @@ function drawwalls()
 	elseif t[8]==21 then 
 		sspr(48,0,16,16,55,34)
 	end
-	if t[7]==32 then 
+	if iswall(t[7]) then 
 		for y=24,40,16 do 
 			for x=24,40,16 do 
 				sspr(0,48,16,16,x,y)
@@ -170,7 +178,7 @@ function drawwalls()
 		sspr(48,0,16,16,32,34)
 	end
 	//--
-	if t[11]==32 then 
+	if iswall(t[11]) then 
 		spr(wall_a+4,16,16)
 		spr(wall_a+1,16,56)
 		for y=24,48,8 do 
@@ -182,7 +190,7 @@ function drawwalls()
 	elseif t[11]==21 then 
 		sspr(56,0,8,16,4,28,16,32)	
 	end
-	if t[13]==32 then 
+	if iswall(t[13]) then 
 		spr(wall_a+3,56,16)
 		spr(wall_a+2,56,56)
 		for y=24,48,8 do 
@@ -194,7 +202,7 @@ function drawwalls()
 	elseif t[13]==21 then 
 		sspr(48,0,8,16,60,28,16,32)
 	end
-	if t[12]==32 then 
+	if iswall(t[12]) then 
 		for y=0,2 do 
 		    for x=0,2 do 
 				if y==1 then aa=_t else aa=_f end 
@@ -208,14 +216,14 @@ function drawwalls()
 		sspr(48,0,16,16,24,28,32,32)
 	end
 	//-- row 0
-	if t[16]==32 then 
+	if iswall(t[16]) then 
 		for y=16,48,16 do 
 			sspr(120,0,8,16,8,y,8,16,_t,_f)
 		end
 		spr(wall_a+4,8,8)
 		spr(wall_a+1,8,64)
 	end
-	if t[18]==32 then 
+	if iswall(t[18]) then 
 		for y=16,48,16 do 
 			sspr(112,0,8,16,64,y,8,16,_t,_f)
 		end

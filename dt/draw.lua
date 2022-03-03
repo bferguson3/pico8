@@ -129,16 +129,6 @@ function _draw()
 	if debug then 
 		pdbg()
 	end
-	//-- map mode draw
-	if mode=="m"then
-		ds=""
-		if dir==_n then ds="nORTH"
-			elseif dir==_s then ds="sOUTH"
-			elseif dir==_e then ds="eAST"
-			elseif dir==_w then ds="wEST"
-		end
-		p(ds,32,0)
-	end
 	
 	//-- script engine
 	if NEXTCHR then 
@@ -150,16 +140,29 @@ function _draw()
 	
 	//-- frame counter
 	_fctr+=1; if _fctr>59 then _fctr=0 end
-	dradar()
+	if mode~='c'then dradar()end
+	//--compass
+	if mode=="m"then
+		ds=""
+		if dir==_n then ds="nORTH"
+			elseif dir==_s then ds="sOUTH"
+			elseif dir==_e then ds="eAST"
+			elseif dir==_w then ds="wEST"
+		end
+		rf(30,0,52,6,0)
+		p(ds,32,1,11)
+	end
 end
+
+jamzone=_f
 
 function dradar()
 	//--radar 
 	rx,ry=61,9
 	base=mb(mapbase,-2,-2)
-	rf(rx-1,ry-1,rx+10,ry+10,3)
-	if _fctr % 2 == 0 then 
-		rect(rx-1,ry-1,rx+10,ry+10,11) end 
+	rect(rx-1,ry-1,rx+10,ry+10,5)
+	rf(rx,ry,rx+9,ry+9,3)
+	//--reg
 	for j=0,4 do
 		for i=0,4 do
 			if pE(base+i)==32 then 
@@ -169,7 +172,17 @@ function dradar()
 		base+=128
 		ry+=2
 	end
-	rect(65,13,66,14,11)
+	rect(65,13,66,14,11)//--player
+	//--static
+	if jamzone==_t then 
+		rf(61,9,70,18,0)
+		for y=9,18 do 
+			for x=61,70 do 
+				r = rnd()
+				if r>0.5 then pset(x,y,7) end
+			end
+		end
+	end
 end
 
 function flashgem(x,y)

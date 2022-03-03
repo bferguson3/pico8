@@ -61,16 +61,16 @@ end
 
 function moveinput()
 	if btnp(⬅️)then 
-		if dir==_n then dir=_w; sfx(5);mapUpdated=_f
-			elseif dir==_w then dir=_s; sfx(5);mapUpdated=_f
-			elseif dir==_s then dir=_e; sfx(5);mapUpdated=_f
-			elseif dir==_e then dir=_n; sfx(5);mapUpdated=_f
+		if dir==_n then dir=_w; ;mapUpdated=_f
+			elseif dir==_w then dir=_s; ;mapUpdated=_f
+			elseif dir==_s then dir=_e; ;mapUpdated=_f
+			elseif dir==_e then dir=_n; ;mapUpdated=_f
 		end
 	elseif btnp(➡️)then 
-		if dir==_n then dir=_e; sfx(5);mapUpdated=_f
-			elseif dir==_e then dir=_s; sfx(5);mapUpdated=_f
-			elseif dir==_s then dir=_w; sfx(5);mapUpdated=_f
-			elseif dir==_w then dir=_n; sfx(5);mapUpdated=_f
+		if dir==_n then dir=_e; mapUpdated=_f
+			elseif dir==_e then dir=_s; mapUpdated=_f
+			elseif dir==_s then dir=_w; mapUpdated=_f
+			elseif dir==_w then dir=_n; mapUpdated=_f
 		end
 	elseif btnp(⬆️)then 
 		if dir==_n and py>0 and nowall()then py-=1; sfx(5);mapUpdated=_f
